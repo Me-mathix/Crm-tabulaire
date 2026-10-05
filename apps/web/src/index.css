@@ -1,9 +1,25 @@
 :root {
-  --color-bg: #ffffff;
-  --color-text: #1f2328;
-  --color-text-muted: #656d76;
-  --color-border: #d0d7de;
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --header: #f0f2f5;
+  --line: #e2e5ea;
+  --line-strong: #cdd2d9;
+  --ink: #1d2530;
+  --muted: #5f6979;
+  --hover: #f0f2f5;
+  --hover-strong: #e4e7ec;
+  --row-hover: #f8f9fb;
+  /* Vert sapin : sélection, actions principales */
+  --accent: #0b6e63;
+  --accent-strong: #08564d;
+  --accent-soft: #e2f1ee;
+  --accent-line: #b7dcd5;
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  color-scheme: light;
 }
 
 *,
@@ -12,9 +28,46 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
-  background: var(--color-bg);
-  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+code {
+  padding: 1px 5px;
+  font-size: 0.92em;
+  background: var(--hover);
+  border-radius: 4px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
 }

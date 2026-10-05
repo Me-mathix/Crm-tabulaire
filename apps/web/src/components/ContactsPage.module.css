@@ -1,0 +1,141 @@
+.page {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  height: 100vh;
+  height: 100dvh;
+  min-width: 0;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px 12px;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.count {
+  font-size: 14px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.gridArea {
+  position: relative;
+  min-height: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.message {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  height: 100%;
+  padding: 24px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.message p {
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* Message par-dessus la grille (aucun résultat, erreur), en-tête toujours visible */
+.overlay {
+  position: absolute;
+  top: 88px;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: min(440px, calc(100% - 32px));
+  padding: 20px;
+  color: var(--muted);
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transform: translateX(-50%);
+}
+
+.overlay p {
+  margin: 0;
+}
+
+.small {
+  font-size: 13px;
+}
+
+.status {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 20px;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.keys {
+  margin-left: auto;
+}
+
+.toast {
+  position: fixed;
+  bottom: 44px;
+  left: 20px;
+  z-index: 60;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  max-width: min(520px, calc(100vw - 40px));
+  padding: 10px 8px 10px 14px;
+  font-size: 14px;
+  color: #fff;
+  background: var(--ink);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(29 37 48 / 0.2);
+}
+
+.toastClose {
+  width: 26px;
+  height: 26px;
+  font-size: 16px;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toastClose:hover {
+  background: rgb(255 255 255 / 0.15);
+}
+
+@media (max-width: 640px) {
+  .toolbar {
+    padding: 12px;
+  }
+
+  .keys {
+    display: none;
+  }
+}
