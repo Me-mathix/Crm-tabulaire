@@ -1,0 +1,325 @@
+.scroller {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+  background: var(--surface);
+  outline: none;
+  overscroll-behavior: contain;
+}
+
+.scroller:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--accent-soft);
+}
+
+.canvas {
+  position: relative;
+  min-width: 100%;
+}
+
+/* ---------- En-tête ---------- */
+
+.headerRow {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  background: var(--header);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.cornerCell {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  flex: none;
+  background: var(--header);
+  border-right: 1px solid var(--line-strong);
+}
+
+.headerCell {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  border-right: 1px solid var(--line);
+  background: var(--header);
+  user-select: none;
+}
+
+.headerCell.dragging {
+  opacity: 0.45;
+}
+
+.headerCell.dropBefore {
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.headerCell.dropAfter {
+  box-shadow: inset -3px 0 0 var(--accent);
+}
+
+.headerLabel {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 100%;
+  padding: 0 10px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.headerLabel:hover {
+  background: var(--hover-strong);
+}
+
+.headerLabel:focus-visible,
+.menuButton:focus-visible,
+.addColumnButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.typeIcon {
+  flex: none;
+  min-width: 22px;
+  padding: 1px 3px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+}
+
+.labelText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sortMark {
+  flex: none;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.menuButton {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  width: 28px;
+  opacity: 0;
+  height: 28px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--muted);
+  background: var(--header);
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.headerCell:hover .menuButton,
+.menuButton:focus-visible,
+.menuButton[aria-expanded='true'] {
+  opacity: 1;
+}
+
+.menuButton:hover,
+.menuButton[aria-expanded='true'] {
+  color: var(--ink);
+  background: var(--hover-strong);
+}
+
+.resizeHandle {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  z-index: 2;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.resizeHandle:hover,
+.resizeHandle:active {
+  background: linear-gradient(var(--accent), var(--accent)) center / 2px 100% no-repeat;
+}
+
+.addColumnCell {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.addColumnButton {
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--muted);
+  background: none;
+  border: 1px dashed var(--line-strong);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.addColumnButton:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ---------- Lignes ---------- */
+
+.row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  min-width: 100%;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.row:hover {
+  background: var(--row-hover);
+}
+
+.rowNumber {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  background: var(--header);
+  border-right: 1px solid var(--line-strong);
+}
+
+.activeRow .rowNumber {
+  color: var(--accent);
+  font-weight: 600;
+  background: var(--accent-soft);
+}
+
+.deleteRow {
+  display: none;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--danger);
+  background: none;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.row:hover .deleteRow {
+  display: block;
+}
+
+.row:hover .rowIndex {
+  display: none;
+}
+
+.deleteRow:hover {
+  background: var(--danger-soft);
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 14px;
+  border-right: 1px solid var(--line);
+  cursor: cell;
+}
+
+.cellText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Alignement et chiffres selon le type de colonne */
+.type_number {
+  justify-content: flex-end;
+  font-variant-numeric: tabular-nums;
+}
+
+.type_date,
+.type_phone {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cellule active : le repère principal de la grille */
+.activeCell {
+  z-index: 2;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.errorCell {
+  background: var(--danger-soft);
+  box-shadow: inset 0 0 0 1px var(--danger);
+}
+
+.activeCell.errorCell {
+  box-shadow: inset 0 0 0 2px var(--danger);
+}
+
+.editor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  padding: 0 10px;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  text-align: inherit;
+  background: var(--surface);
+  border: 0;
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  box-shadow: 0 4px 14px rgb(29 37 48 / 0.12);
+}
+
+.type_number .editor {
+  text-align: right;
+}
+
+.editor[aria-invalid='true'] {
+  outline-color: var(--danger);
+}
+
+.editorError {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 5;
+  padding: 5px 8px;
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  background: var(--danger);
+  border-radius: 5px;
+}
