@@ -1,0 +1,46 @@
+name: crm
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: crm-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-crm}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-crm}
+      POSTGRES_DB: ${POSTGRES_DB:-crm}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  web:
+    image: node:22-alpine
+    container_name: crm-web
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -w web -- --host 0.0.0.0 --port 5173"
+    environment:
+      # Polling pour que le hot reload fonctionne sur les volumes montés (macOS / Windows)
+      VITE_USE_POLLING: "true"
+    ports:
+      - "${WEB_PORT:-5173}:5173"
+    volumes:
+      - .:/app
+      # node_modules restent dans le conteneur pour ne pas mélanger les binaires hôte / Linux
+      - web-node-modules:/app/node_modules
+      - web-app-node-modules:/app/apps/web/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Le service `api` (NestJS) sera ajouté ici à l'étape suivante.
+
+volumes:
+  db-data:
+  web-node-modules:
+  web-app-node-modules:
