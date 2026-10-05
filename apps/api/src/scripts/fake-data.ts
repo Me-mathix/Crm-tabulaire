@@ -14,8 +14,8 @@ export const DEFAULT_FIELDS: readonly SeedField[] = [
   { key: 'company', label: 'Entreprise', type: 'text', width: 210 },
   { key: 'phone', label: 'Téléphone', type: 'phone', width: 160 },
   { key: 'city', label: 'Ville', type: 'text', width: 160 },
-  { key: 'lastContact', label: 'Dernier contact', type: 'date', width: 150 },
-  { key: 'score', label: 'Score', type: 'number', width: 110 },
+  { key: 'lastContact', label: 'Dernier contact', type: 'date', width: 170 },
+  { key: 'score', label: 'Score', type: 'number', width: 120 },
 ];
 
 /** Valeurs brutes, telles qu'un utilisateur les saisirait (normalisées ensuite par parseValue). */
