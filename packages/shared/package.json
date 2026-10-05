@@ -1,0 +1,28 @@
+{
+  "name": "@crm/shared",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Types de champs, validation et contrat API partagés entre le front et l'API",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "libphonenumber-js": "^1.12.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.2",
+    "vitest": "^3.2.0"
+  }
+}

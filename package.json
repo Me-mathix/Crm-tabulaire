@@ -2,13 +2,13 @@
   "name": "crm",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
-    "dev:web": "npm run dev -w web",
-    "db:up": "docker compose up -d db",
     "up": "docker compose up",
-    "down": "docker compose down"
+    "down": "docker compose down",
+    "seed": "docker compose exec api npm run seed -w api --",
+    "test": "npm test --workspaces --if-present"
   }
 }
